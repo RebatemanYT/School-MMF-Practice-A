@@ -1,6 +1,6 @@
 #functions go here
 
-def not_blank(question):
+def: not_blank(question):
   valid = False
   while not valid:
     response = input(question)
