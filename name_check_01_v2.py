@@ -1,6 +1,7 @@
 #functions go here
 
-def not_blank(question, error_message):
+#Checks for name and if it's blank or not.
+def not_blank(question, error_noname):
   valid = False
   
   while not valid:
@@ -9,7 +10,7 @@ def not_blank(question, error_message):
     if response != "":
       return response
     else: 
-      print(error_message)
+      print(error_noname)
 
 #Main routine goes here
 name = not_blank("Name: ","Sorry, you have to have a name. Please enter your name.")
