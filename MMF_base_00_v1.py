@@ -2,8 +2,9 @@
 
 #functions goes here
 
+#name_check function start
 #Checks for name and if it's blank or not.
-def not_blank(question, error_noname):
+def not_blank(question, error):
   valid = False
   
   while not valid:
@@ -12,7 +13,8 @@ def not_blank(question, error_noname):
     if response != "":
       return response
     else: 
-      print(error_noname)
+      print(error)
+#name_check function end
 
 #********** MAIN ROUTINE **********
 
