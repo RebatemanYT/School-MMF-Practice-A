@@ -3,7 +3,7 @@
 #initalise loop so that it runs at least once
 name = ""
 count = 0
-MAX_TICKET = 2
+MAX_TICKET = 5
 
 while name != "xxx" and count < MAX_TICKET:
   if count == MAX_TICKET - 1:
