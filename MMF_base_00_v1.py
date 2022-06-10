@@ -14,7 +14,35 @@ def not_blank(question, error):
       return response
     else: 
       print(error)
-#name_check function end
+
+# name_check function end
+
+#age_check function start
+def int_check(question, low_num, high_num):
+
+  error = ("Please enter a whole number between {} " \
+          "and {}, inclusive.".format(low_num, high_num))
+
+  valid = False
+  while not valid:
+    
+    #ask user for number and check if valid.
+    try:
+      response = int(input(question))
+      
+      #if interger is lower than lowest possible value, error. if interger is in correct range, good. if not, error.
+      if response <= high_num:
+        return response
+      elif high_num < response:
+        print("Sorry, it seems like you (likely) accidentally put too high of a number.")
+        continue
+      else:
+        print(error)
+      
+    #if interger isn't recieved, display an error.
+    except ValueError:
+      print(error)
+#age_check function end
 
 #********** MAIN ROUTINE **********
 
@@ -29,7 +57,7 @@ def not_blank(question, error):
 #initalise loop so that it runs at least once
 name = ""
 count = 0
-MAX_TICKET = 5
+MAX_TICKET = 150
 
 while name != "xxx" and count < MAX_TICKET:
   if count == MAX_TICKET - 1:
@@ -46,8 +74,16 @@ while name != "xxx" and count < MAX_TICKET:
     name = not_blank("Name: ","Sorry, you have to have a name. Please enter your name. \n")
   if name != "xxx":
     #Excluding the exit code from counting towards sold tickets.
+    print("Name inputted. \n")
+
+    #ask for age
+    age = int_check("Age: ", 12, 130)
+    #check if age is valid
+    if age < 12:
+      print("Sorry, you are too young for this movie. \n")
+      continue
+    #storing here for when needed the adding to the counter as if someone is too young, they would still count as a sold ticket.
     count += 1
-    print("Ticket sold. \n")
 
 if count == MAX_TICKET:
   #Lack of tickets = no more code running.
@@ -78,7 +114,6 @@ else:
        "You have {} tickets left."
        .format(count, MAX_TICKET - count))
 
-  #Get age (between 12 and 130)
   #Calculate ticket price
   #Loop to ask for snacks
   #Calculate snack price

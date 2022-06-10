@@ -3,7 +3,7 @@
 def int_check(question, low_num, high_num):
 
   error = ("Please enter a whole number between {} " \
-          "and {}.".format(low_num, high_num))
+          "and {}, inclusive. \n".format(low_num, high_num))
 
   valid = False
   while not valid:
@@ -12,9 +12,12 @@ def int_check(question, low_num, high_num):
     try:
       response = int(input(question))
       
-      #if interger is in correct range, good. if not, error.
-      if low_num <= response <= high_num:
+      #if interger is lower than lowest possible value, error. if interger is in correct range, good. if not, error.
+      if response <= high_num:
         return response
+      elif high_num < response:
+        print("Sorry, it seems like you accidentally put too high of a number.")
+        continue
       else:
         print(error)
       
