@@ -71,16 +71,16 @@ while name != "xxx" and count < MAX_TICKET:
 
   #Get details
     #Get name (not blank)
-    name = not_blank("Name: ","Sorry, you have to have a name. Please enter your name. \n")
+    name = not_blank("Name: ","Sorry, you have to have a name. Please enter your name.")
   if name != "xxx":
     #Excluding the exit code from counting towards sold tickets.
-    print("Name inputted. \n")
+    print("Name inputted.")
 
     #ask for age
     age = int_check("Age: ", 12, 130)
     #check if age is valid
     if age < 12:
-      print("Sorry, you are too young for this movie. \n")
+      print("Sorry, you are too young for this movie.")
       continue
     #storing here for when needed the adding to the counter as if someone is too young, they would still count as a sold ticket.
     count += 1
@@ -92,25 +92,25 @@ if count == MAX_TICKET:
 
 elif MAX_TICKET - count == MAX_TICKET - 1 & MAX_TICKET - count == 1:
   #1 ticket sold and 1 ticket left.
-  print("You have sold {} ticket  \n"
+  print("You have sold {} ticket.  \n"
        "You have {} ticket left."
        .format(count, MAX_TICKET - count))
 
 elif MAX_TICKET - count == MAX_TICKET - 1:
   #1 ticket sold and multiple tickets left.
-  print("You have sold {} ticket  \n"
+  print("You have sold {} ticket.  \n"
        "You have {} tickets left."
        .format(count, MAX_TICKET - count))
 
 elif MAX_TICKET - count == 1:
   #Multiple tickets sold and 1 ticket left.
-  print("You have sold {} tickets  \n"
+  print("You have sold {} tickets.  \n"
        "You have {} ticket left."
        .format(count, MAX_TICKET - count))
 
 else:
   #Multiple tickets sold and multiple tickets left.
-  print("You have sold {} tickets  \n"
+  print("You have sold {} tickets.  \n"
        "You have {} tickets left."
        .format(count, MAX_TICKET - count))
 
