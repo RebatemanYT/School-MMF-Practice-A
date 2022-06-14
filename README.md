@@ -1,0 +1,1 @@
+This is only public so I can use replit to do it w/o paying. This is GitHub/Python practice for school work and nothing more.
