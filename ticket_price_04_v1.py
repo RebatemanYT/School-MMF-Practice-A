@@ -77,7 +77,7 @@ while name != "xxx" and count < MAX_TICKET:
     #Get name (not blank)
     name = not_blank("Name: ","Sorry, you have to have a name. Please enter your name.")
   if name != "xxx":
-    #Excluding the exit code from counting towards sold tickets.
+    #Excluding the exit code from counting towards sold tickets etiher numerically or visually, along with skipping future steps.
     print("Name inputted.")
 
     #ask for age
@@ -87,45 +87,56 @@ while name != "xxx" and count < MAX_TICKET:
       print("Sorry, you are too young for this movie.")
       continue
 
+#NEW STUFF
     if age < 16:
-      profit = 25
+      ticket_price = 7.5
+    elif age < 65:
+      ticket_price = 10.5
+    else:
+      ticket_price = 6.5
+
+    profit_made = ticket_price - 5
+    profit += profit_made
+
+    print("{} : ${:.2f}".format(name, ticket_price))
+    
     #storing here for when needed the adding to the counter as if someone is too young, they would still count as a sold ticket.
     count += 1
 
 if count == MAX_TICKET:
   #Lack of tickets = no more code running.
-  print("You have ran out of available tickets.  \n"
-        "You have made ${:.2f} total and ${:.2f} in profit."
-        .format(profit / 10, (profit / 10) + (count * 5)))
-#Rest are correcting grammatical issues. 
+  print("You have ran out of tickets.  \n"
+        "You have made ${:.2f} in profit."
+        .format(profit))
+#Rest are correcting grammatical issues when exit code. 
 
 elif MAX_TICKET - count == MAX_TICKET - 1 & MAX_TICKET - count == 1:
   #1 ticket sold and 1 ticket left.
   print("You have sold {} ticket.  \n"
         "You have {} ticket left.  \n"
-        "You have made ${:.2f} total and ${:.2f} in profit." 
-       .format(count, MAX_TICKET - count, (profit / 10) + (count * 5), profit / 10))
+        "You have made ${:.2f} in profit." 
+       .format(count, MAX_TICKET - count, profit))
 
 elif MAX_TICKET - count == MAX_TICKET - 1:
   #1 ticket sold and multiple tickets left.
   print("You have sold {} ticket.  \n"
         "You have {} tickets left.  \n"
-        "You have made ${:.2f} total and ${:.2f} in profit." 
-       .format(count, MAX_TICKET - count, (profit / 10) + (count * 5), profit / 10))
+        "You have made ${:.2f} in profit." 
+       .format(count, MAX_TICKET - count, profit))
 
 elif MAX_TICKET - count == 1:
   #Multiple tickets sold and 1 ticket left.
   print("You have sold {} tickets.  \n"
         "You have {} ticket left.  \n"
-        "You have made ${:.2f} total and ${:.2f} in profit." 
-       .format(count, MAX_TICKET - count, (profit / 10) + (count * 5), profit / 10))
+        "You have made ${:.2f} in profit." 
+       .format(count, MAX_TICKET - count, profit))
 
 else:
   #Multiple tickets sold and multiple tickets left.
   print("You have sold {} tickets.  \n"
         "You have {} tickets left.  \n"
-        "You have made ${:.2f} total and ${:.2f} in profit." 
-       .format(count, MAX_TICKET - count, (profit / 10) + (count * 5), profit / 10))
+        "You have made ${:.2f} in profit." 
+       .format(count, MAX_TICKET - count, profit)
 
   #Calculate ticket price
   #Loop to ask for snacks
