@@ -67,11 +67,11 @@ while name != "xxx" and count < MAX_TICKET:
   if count == MAX_TICKET - 1:
     #When 1 seat is left, don't say seats, say seat.
     print("You have {} seat "
-       "left".format(MAX_TICKET - count))
+       "left.".format(MAX_TICKET - count))
   else:
     #In every other case, say seats.
     print("You have {} seats "
-       "left".format(MAX_TICKET - count))
+       "left.".format(MAX_TICKET - count))
 
   #Get details
     #Get name (not blank)
@@ -145,5 +145,3 @@ else:
     #If needed, add surcharge.
 
 #Calculate total sales and profit
-
-#Output data to text file
