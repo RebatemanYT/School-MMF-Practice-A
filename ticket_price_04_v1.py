@@ -136,7 +136,7 @@ else:
   print("You have sold {} tickets.  \n"
         "You have {} tickets left.  \n"
         "You have made ${:.2f} in profit." 
-       .format(count, MAX_TICKET - count, profit)
+       .format(count, MAX_TICKET - count, profit))
 
   #Calculate ticket price
   #Loop to ask for snacks
