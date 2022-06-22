@@ -1,3 +1,4 @@
+#turns out this code registers any input as "yes" so have to go again
 #yes/no function start
 def yesno (question):
   #error message
@@ -16,7 +17,7 @@ def yesno (question):
       print("One x is also no. You put too many x's that we have to ask the question again.")
       continue
     else:
-      print(error)
+      print(error) 
       continue
 
 #yes/no function end

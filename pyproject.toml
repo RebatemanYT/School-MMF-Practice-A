@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "python-template"
+name = "Mega Movie Fundraser (Rebateman School Stuff)"
 version = "0.1.0"
-description = ""
+description = "For school."
 authors = ["Ryan Bateman"]
 
 [tool.poetry.dependencies]
