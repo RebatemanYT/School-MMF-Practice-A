@@ -1,5 +1,5 @@
 #yes/no function start
-def string_check(question):
+def string_check(question, to_check):
   #error message
   error = "Please answer with yes or no (or y or n)."
   
@@ -11,6 +11,10 @@ def string_check(question):
 
     if response in to_check:
       return response
+      
+    elif response == "xxx":
+      print("One x is also no. You put too many x's that we have to ask the question again.")
+      continue
 
     else:
       for item in to_check:
@@ -38,7 +42,7 @@ def string_check(question):
 
 #main routine goes here
 
-for item in range(0,6):
+for item in range(0,8):
   want_snacks = string_check("Do you want snacks? ", ["yes", "no", "x"])
   
   if want_snacks == "x":
