@@ -1,7 +1,8 @@
 #yes/no function start
-def string_check(question, to_check):
+
+#Taking in 3 things: question, what are the valid responses, error message
+def string_check(question, to_check, error):
   #error message
-  error = "Please answer with yes or no (or y or n)."
   
   valid = False
   while not valid:
@@ -12,10 +13,6 @@ def string_check(question, to_check):
     if response in to_check:
       return response
       
-    elif response == "xxx":
-      print("One x is also no. You put too many x's that we have to ask the question again.")
-      continue
-
     else:
       for item in to_check:
         #Checks if the response is the first letter of an item in the list
@@ -43,10 +40,12 @@ def string_check(question, to_check):
 #main routine goes here
 
 for item in range(0,8):
-  want_snacks = string_check("Do you want snacks? ", ["yes", "no", "x"])
+  want_snacks = string_check("Do you want snacks? ", ["yes", "no", "x"], "Please answer with yes or no (or y or n).")
   
   if want_snacks == "x":
     #converting x to no
     want_snacks = "no"
-  
-  print("You have inputed a valid answer. To simplify code, we have converted your answer to", want_snacks, "so let's go to what your answer says to do. \n")
+    
+  #output
+  print("Output:", want_snacks, "\n")
+#at this point, getting annoyed with Replit...
