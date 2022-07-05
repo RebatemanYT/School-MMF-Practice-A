@@ -1,5 +1,22 @@
 #yes/no function start
 
+#valid snack list
+valid_snacks = [
+  ["popcorn", "p", "a"], #Popcorn
+  ["m&m's", "mm", "m&ms", "m&m", "mm's", "mms", "chocolate", "m", "b"], #M&Ms
+  ["pita chips", "pc", "p c", "pita", "chip", "chips", "c"], #Pita Chips
+  ["water", "drink", "w", "d"], #Water
+  ["xxx", "x", "e"] #Done - Used to exit loop
+]
+yn = [
+  ["yes", "y"],
+  ["no", "n", "x"]
+]
+#initalize ariables
+snack_ok = ""
+snack_list = ""
+var_list = ""
+
 #Taking in 3 things: question, what are the valid responses, error message
 def string_check(question, to_check, error):
   #error message
@@ -11,6 +28,7 @@ def string_check(question, to_check, error):
     response = input(question).lower()
 
     if response in to_check:
+      var_list == to_check[0].title()
       return response
       
     else:
@@ -39,8 +57,9 @@ def string_check(question, to_check, error):
 
 #main routine goes here
 
+#Want Snacks?
 for item in range(0,8):
-  want_snacks = string_check("Do you want snacks? ", ["yes", "no", "x"], "Please answer with yes or no (or y or n).")
+  want_snacks = string_check("Do you want snacks? ", yn, "Please answer with yes or no (or y or n).")
   
   if want_snacks == "x":
     #converting x to no
@@ -48,4 +67,16 @@ for item in range(0,8):
     
   #output
   print("Output:", want_snacks, "\n")
-#at this point, getting annoyed with Replit...
+  
+  if want_snacks != "no":
+    print("List of snack options: \n",
+         "a. Popcorn \n",
+         "b. M&Ms \n",
+         "c. Pita Chips \n",
+         "d. Water \n",
+         "e. xxx (Replacement for 'done', continues past this point) \n")
+    snack = string_check("What snacks do you want? ", valid_snacks, "Please refer to the list of snacks. \n")
+    if snack != "xxx" or snack != "x" or snack != "e":
+      print("Output:", snack, "\n")
+    else:
+      print("test 2")
