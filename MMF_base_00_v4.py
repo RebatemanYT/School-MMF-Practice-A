@@ -195,7 +195,7 @@ yes_no = [
 #initalise loop so that it runs at least once
 name = ""
 ticket_count = 0
-MAX_TICKET = 2
+MAX_TICKET = 5
 
 # Initialise lists (to make data-frame in due course)
 all_names = []
