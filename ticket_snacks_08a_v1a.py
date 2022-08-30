@@ -4,7 +4,8 @@ import pandas
 test_names = ['a', 'b', 'c', 'd', 'e', 'f']
 #test_names = [1]
 #all_ages = [15, 104, 55, 60, 100, 25]
-all_tickets = [7.5, 6.5, 10.5, 10.5, 6.5, 10.5]
+#all_tickets = [7.5, 6.5, 10.5, 10.5, 6.5, 10.5]
+tickets = [7.5, 6.5, 10.5, 10.5, 6.5, 10.5]
 
 popcorn = []
 mms = []
@@ -15,9 +16,9 @@ names = test_names
 # names = []
 # ages = all_ages
 # ages = []
-tickets = all_tickets
-tickets = []
-ticket_prices = []
+# tickets = all_tickets
+# tickets = []
+# ticket_prices = []
 
 snack_lists = [popcorn, mms, pita_chips, water, orange_juice]
 
@@ -25,7 +26,7 @@ snack_lists = [popcorn, mms, pita_chips, water, orange_juice]
 movie_data_dict = {
   'Name': names,
 #  'Age': ages,
-  'Ticket Value': tickets,
+  'Ticket': tickets,
   'Popcorn': popcorn,
   'M&Ms': mms,
   'Pita Chips': pita_chips,
@@ -43,7 +44,7 @@ price_dict = {
 
 test_data = [
   [[2, 'Popcorn'], [1, 'M&Ms']],
-  [[]],
+  [],
   [[2, 'Popcorn'], [1, 'Pita Chips'], [1, 'Orange Juice'], [1, 'Water'], [1, 'M&Ms']],
   [[2, 'Popcorn'], [1, 'Pita Chips'], [4, 'Orange Juice']],
   [[1, 'Popcorn'], [1, 'M&Ms'], [1, 'Water']],
@@ -58,7 +59,6 @@ for client in test_data:
 
   #print(snack_lists)
   snack_order = test_data[count]
-  tickets = all_tickets
   count += 1
   
   for item in snack_order:
@@ -68,15 +68,20 @@ for client in test_data:
       add_list = movie_data_dict[to_find]
       add_list[-1] = amount
 
-#print
+#Movie Frame
 movie_frame = pandas.DataFrame(movie_data_dict)
-movie_frame = movie_frame.set_index('Name')
+# movie_frame = movie_frame.set_index('Name')
 
-movie_frame['Sub Total'] = \
+movie_frame['Total'] = \
   movie_frame['Ticket'] + \
   movie_frame['Popcorn']*price_dict['Popcorn'] + \
   movie_frame['Water']*price_dict['Water'] + \
   movie_frame['Pita Chips']*price_dict['Pita Chips'] + \
   movie_frame['M&Ms']*price_dict['M&Ms'] + \
   movie_frame['Orange Juice']*price_dict['Orange Juice']
+
+#renaming movie frames
+movie_frame = movie_frame.rename(columns={'Orange Juice': 'OJ', 
+                                          'Pita Chips': 'PChips'})
+
 print(movie_frame)
