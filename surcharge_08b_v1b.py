@@ -46,7 +46,7 @@ while name != "xxx":
   #Asking for payment method
   how_pay = "invalid choice"
   while how_pay == "invalid choice":
-    how_pay = input("Please choose a payment method (cash or credit). \nNote that to pay by credit, there's a surcharge of 5%.").lower()
+    how_pay = input("Please choose a payment method (cash or credit). \nNote that to pay by credit, there's a surcharge of 5%. \n").lower()
     how_pay = string_check(how_pay, pay_method)
 
   # Ask for subtotal (testing)
@@ -59,4 +59,4 @@ while name != "xxx":
   
   total = subtotal + surcharge
   
-  print("| Name: {} |".format(name), "Subtotal: {:.2f} |".format(subtotal), "Surcharge: {:.2f} |".format(surcharge), "Total: {:.2f}".format(total))
+  print("| Name: {} |".format(name), "Subtotal: {:.2f} |".format(subtotal), "Surcharge: {:.2f} |".format(surcharge), "Total: {:.2f} |".format(total))
