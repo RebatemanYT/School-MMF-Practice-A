@@ -185,6 +185,11 @@ yes_no = [
     ["no", "n"]
 ]
 
+pay_method = [
+    ["cash", "ca"],
+    ["credit", "cr"]
+]
+
 #********** MAIN ROUTINE **********
 
 #Set up dictionaries / Lists needed to hold data
@@ -206,15 +211,15 @@ mms = []
 pita_chips = []
 water = []
 orange_juice = []
-names = []
-tickets = []
+all_names = []
+all_tickets = []
 
 snack_lists = [popcorn, mms, pita_chips, water, orange_juice]
 
 # Data Frame Dictionary
 movie_data_dict = {
-  'Name': names,
-  'Ticket': tickets,
+  'Name': all_names,
+  'Ticket': all_tickets,
   'Popcorn': popcorn,
   'M&Ms': mms,
   'Pita Chips': pita_chips,
@@ -250,8 +255,8 @@ while name != "xxx" and ticket_count < MAX_TICKET:
   #storing here for when needed the adding to the counter as if someone is too young, they would still count as a sold ticket.
   ticket_count += 1
   # add name and ticket price to lists
-  names.append(name)
-  tickets.append(ticket_price)
+  all_names.append(name)
+  all_tickets.append(ticket_price)
 
 
   #get snacks!
