@@ -44,8 +44,7 @@ def int_check(question):
             print(error)
 
 
-# Checks number of tickets left and warns user
-# if maximum is being approached
+# Checks number of tickets left and warns user if maximum is being approached
 def check_tickets(tickets_sold, ticket_limit):
     # tells user how many seats are left
     if tickets_sold < ticket_limit - 1:
@@ -93,8 +92,7 @@ def string_check(choice, options):
         # if the snack is in one of the lists, return the full name of the snack
         if choice in var_list:
 
-            # Get full name of snack and put it
-            # in title case so it looks nice when outputted
+            # Get full name of snack and put it in title case so it looks nice when outputted
             chosen = var_list[0].title()
             is_valid = "yes"
             break
@@ -278,7 +276,7 @@ while name != "xxx" and ticket_count < MAX_TICKETS:
     snack_order = get_snack()
 
   else:
-      snack_order = []
+    snack_order = []
 
   # Assume no snacks have been bought...
   for item in snack_lists:
@@ -294,12 +292,12 @@ while name != "xxx" and ticket_count < MAX_TICKETS:
         add_list[-1] = 4
       else:
         add_list[-1] += amount
-  print(snack_order)
+  print("Snack Order: ", snack_order)
 
   # Ask for payment method
   how_pay = "invalid choice"
   while how_pay == "invalid choice":
-      how_pay = input("Please choose a payment method (cash / credit)? ").lower()
+      how_pay = input("Please choose a payment method (cash / credit)? Note that there is a 5% surcharge on credit payments. ").lower()
       how_pay = string_check(how_pay, pay_method)
 
   if how_pay == "Credit":
@@ -313,17 +311,21 @@ while name != "xxx" and ticket_count < MAX_TICKETS:
 # print details...
 # Create dataframe and set index to name column
 movie_frame = pandas.DataFrame(movie_data_dict)
+#movie_frame = movie_frame.set_index('Name')
 
 # create column called 'Sub Total'
 # fill it price for snacks and ticket
 
-movie_frame["Sub Total"] = \
-  movie_frame['Ticket'] + \
+movie_frame["Snack Prices"] = \
   movie_frame['Popcorn'] * price_dict['Popcorn'] + \
   movie_frame['Water'] * price_dict['Water'] + \
   movie_frame['Pita Chips'] * price_dict['Pita Chips'] + \
   movie_frame['M&Ms'] * price_dict['M&Ms'] + \
   movie_frame['Orange Juice'] * price_dict['Orange Juice']
+
+movie_frame["Sub Total"] = \
+  movie_frame['Ticket'] + \
+  movie_frame['Snack Prices']
 
 movie_frame["Surcharge"] = \
   movie_frame['Sub Total'] * movie_frame['SurMul']
@@ -333,16 +335,36 @@ movie_frame["Total"] = movie_frame['Sub Total'] + movie_frame['Surcharge']
 # Shorten column names
 movie_frame = movie_frame.rename(columns={'Orange Juice': 'OJ',
                                           'Pita Chips': 'Chip',
-                                          'Popcorn': 'Pop'})
+                                          'Popcorn': 'Pop',
+                                          'Water': 'H2O',
+                                          'Sub Total': 'SubTot',
+                                          'Surcharge': 'Surc',
+                                          'Snack Prices': 'Snack$'})
 
 pandas.set_option('display.max_columns', None)
-#pandas.set_option('precision', 2)
+pandas.set_option('display.precision', 2)
+#movie_frame['Total'] = movie_frame['Total'.]
 
-print(movie_frame)
+print_all_loop = ""
+while print_all_loop != "continue":
+  print_all = not_blank("Do you want to print all of the collums or just the name, ticket price, snack price, sub total, surcharge and total? Yes for all, No for limited (with also y or n as options) \n").lower()
+  if print_all == "yes" or print_all == "y":
+    print(movie_frame)
+    print_all_loop = "continue"
+  elif print_all == "no" or print_all == "n":
+    print(movie_frame[['Name', 'Ticket', 'Snack$', 'SubTot', 'Surc', 'Total']])
+    print_all_loop = "continue"
+  else:
+    print("Error: Invalid Input")
+
+print()
+
+# total_profit = movie_frame['Total']
 
 # Calculate ticket profit...
 ticket_profit = ticket_sales - (5 * ticket_count)
 print("Ticket profit: ${:.2f}".format(ticket_profit))
+#print("Total profit: ", total_profit)
 
 # Tell user if they have unsold tickets...
 if ticket_count == MAX_TICKETS:
