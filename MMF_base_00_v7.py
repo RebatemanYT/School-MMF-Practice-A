@@ -206,7 +206,12 @@ orange_juice = []
 
 snack_lists = [popcorn, mms, pita_chips, water, orange_juice]
 
+#Store surcharge mult.
 surcharge_mult_list = []
+
+#Store summary data
+summary_headings = ["Popcorn", "M&M's", "Pita Chips", "Water", "Orange Juice", "Snack Profit", "Ticket Profit", "Total Profit"]
+summary_data = []
 
 # Data Frame Dictionary
 movie_data_dict = {
@@ -219,6 +224,12 @@ movie_data_dict = {
   'M&Ms': mms,
   'Orange Juice': orange_juice,
   'SurMul': surcharge_mult_list
+}
+
+#Summary Dictionary
+summary_data_dict = {
+  'Item': summary_headings,
+  'Amount': summary_data
 }
 
 # cost of each snack
@@ -353,6 +364,26 @@ pandas.set_option('display.max_columns', None)
 pandas.set_option('display.precision', 2)
 #movie_frame['Total'] = movie_frame['Total'.]
 
+#Set up summary dataframe
+#Populate snack items...
+for item in snack_lists:
+  #sum items in each snack list.
+  summary_data.append(sum(item))
+
+#Get snack profit
+#Get snack total from panda
+snack_total = movie_frame['Snacks'].sum
+snack_profit = snack_total * 0.2
+summary_data.append(snack_profit)
+
+# Calculate ticket profit...
+ticket_profit = ticket_sales - (5 * ticket_count)
+summary_data.append(ticket_profit)
+
+#Total profit
+total_profit = snack_profit + ticket_profit
+summary_data.append(total_profit)
+
 print_all_loop = ""
 while print_all_loop != "continue":
   print_all = not_blank(" \n""Do you want to print all of the collums or just the name, ticket price, snack price, sub total, surcharge and total? Yes for all, No for limited (with also y or n as options) \n").lower()
@@ -369,8 +400,7 @@ print()
 
 # total_profit = movie_frame['Total']
 
-# Calculate ticket profit...
-ticket_profit = ticket_sales - (5 * ticket_count)
+#Print ticket profit
 print("Ticket profit: ${:.2f}".format(ticket_profit))
 #print("Total profit: ", total_profit)
 
