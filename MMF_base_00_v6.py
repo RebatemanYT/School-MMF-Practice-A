@@ -57,12 +57,13 @@ def check_tickets(tickets_sold, ticket_limit):
 
     return ""
 
-
+def get_age():
+  # Get age (between 12 and 130)
+  age = int_check("Age: ")
+  return age
+  
 # Gets ticket price based on age
-def get_ticket_price():
-
-    # Get age (between 12 and 130
-    age = int_check("Age: ")
+def get_ticket_price(age):
 
     # check that age is valid...
     if age < 12:
@@ -187,7 +188,7 @@ pay_method = [
 ]
 
 # initialise loop so that it runs at least once
-MAX_TICKETS = 5
+MAX_TICKETS = 6
 
 name = ""
 ticket_count = 0
@@ -195,6 +196,7 @@ ticket_sales = 0
 
 # Initialise lists (to make data-frame in due course)
 all_names = []
+all_ages = []
 all_tickets = []
 popcorn = []
 mms = []
@@ -209,6 +211,7 @@ surcharge_mult_list = []
 # Data Frame Dictionary
 movie_data_dict = {
   'Name': all_names,
+  'Age': all_ages,
   'Ticket': all_tickets,
   'Popcorn': popcorn,
   'Water': water,
@@ -245,16 +248,20 @@ while name != "xxx" and ticket_count < MAX_TICKETS:
       break
 
   # Get ticket price based on age
-  ticket_price = get_ticket_price()
+  age = get_age()
+  ticket_price = get_ticket_price(age)
   # If age is invalid, restart loop (and get name again)
   if ticket_price == "invalid ticket price":
-      continue
+    continue
+  else:
+    print("Price: ${:.2f}".format(ticket_price))
 
   ticket_count += 1
   ticket_sales += ticket_price
 
   # add name and ticket price to lists
   all_names.append(name)
+  all_ages.append(age)
   all_tickets.append(ticket_price)
 
   # Get snacks
@@ -267,11 +274,11 @@ while name != "xxx" and ticket_count < MAX_TICKETS:
   # If they say yes, ask what snacks they want (and add to our snack list)
   if check_snack == "Yes":
     print("Options:")
-    print("a. Popcorn.")
-    print("b. M&M's")
-    print("c. Pita Chips")
-    print("d. Water")
-    print("e. Orange Juice")
+    print("a. Popcorn (Cost: $2.50)")
+    print("b. M&M's (Cost: $3.00)")
+    print("c. Pita Chips (Cost: $4.50)")
+    print("d. Water (Cost: $2.00)")
+    print("e. Orange Juice (Cost: $3.50)")
     print("Input xxx or done in order to finish.")
     snack_order = get_snack()
 
@@ -337,9 +344,10 @@ movie_frame = movie_frame.rename(columns={'Orange Juice': 'OJ',
                                           'Pita Chips': 'Chip',
                                           'Popcorn': 'Pop',
                                           'Water': 'H2O',
-                                          'Sub Total': 'SubTot',
-                                          'Surcharge': 'Surc',
-                                          'Snack Prices': 'Snack$'})
+                                          'Sub Total': 'SubT',
+                                          'SurMul': 'SurX',
+                                          'Surcharge': 'Sur',
+                                          'Snack Prices': 'Sna$'})
 
 pandas.set_option('display.max_columns', None)
 pandas.set_option('display.precision', 2)
@@ -347,12 +355,12 @@ pandas.set_option('display.precision', 2)
 
 print_all_loop = ""
 while print_all_loop != "continue":
-  print_all = not_blank("Do you want to print all of the collums or just the name, ticket price, snack price, sub total, surcharge and total? Yes for all, No for limited (with also y or n as options) \n").lower()
+  print_all = not_blank(" \n""Do you want to print all of the collums or just the name, ticket price, snack price, sub total, surcharge and total? Yes for all, No for limited (with also y or n as options) \n").lower()
   if print_all == "yes" or print_all == "y":
     print(movie_frame)
     print_all_loop = "continue"
   elif print_all == "no" or print_all == "n":
-    print(movie_frame[['Name', 'Ticket', 'Snack$', 'SubTot', 'Surc', 'Total']])
+    print(movie_frame[['Name', 'Ticket', 'Sna$', 'SubT', 'Sur', 'Total']])
     print_all_loop = "continue"
   else:
     print("Error: Invalid Input")
