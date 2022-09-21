@@ -119,10 +119,10 @@ def get_snack():
   #Valid snacks holds list of all snacks - Each item in valid snacks is a list with valid options for each snack <full name, letter code (a - e), and possible abbreviations etc>
 
   valid_snacks = [
-  ["popcorn", "p", "corn", "a"],
-  ["M&Ms", "m&m's", "mms", "m", "b"], # first item is M&Ms for inclusion in output
+  ["popcorn", "p", "pop", "corn", "a"],
+  ["M&Ms", "m&m's", "mms", "m", "chocolate", "b"], #first item is M&Ms for output
   ["pita chips", "chips", "pc", "pita", "c"],
-  ["water", "w", "d"],
+  ["water", "w", "h2o", "d"],
   ["orange juice", "oj", "o", "juice", "orange", "e"]
 ]
 
@@ -130,7 +130,7 @@ def get_snack():
   snack_order = []
 
   desired_snack = ""
-  while desired_snack != "xxx":
+  while desired_snack != "xxx" or desired_snack != "no" or desired_snack != "done":
 
     snack_row = []
 
@@ -276,25 +276,16 @@ while name != "xxx" and ticket_count < MAX_TICKETS:
   all_tickets.append(ticket_price)
 
   # Get snacks
-  # ask user if they want a snack
-  check_snack = "invalid choice"
-  while check_snack == "invalid choice":
-      want_snack = input("Do you want to order snacks? ").lower()
-      check_snack = string_check(want_snack, yes_no)
 
-  # If they say yes, ask what snacks they want (and add to our snack list)
-  if check_snack == "Yes":
-    print("Options:")
-    print("a. Popcorn (Cost: $2.50)")
-    print("b. M&M's (Cost: $3.00)")
-    print("c. Pita Chips (Cost: $4.50)")
-    print("d. Water (Cost: $2.00)")
-    print("e. Orange Juice (Cost: $3.50)")
-    print("Input xxx or done in order to finish.")
-    snack_order = get_snack()
-
-  else:
-    snack_order = []
+  # Ask what snacks they want (and add to our snack list)
+  print("Options:")
+  print("a. Popcorn (Cost: $2.50)")
+  print("b. M&M's (Cost: $3.00)")
+  print("c. Pita Chips (Cost: $4.50)")
+  print("d. Water (Cost: $2.00)")
+  print("e. Orange Juice (Cost: $3.25)")
+  print("Input xxx or done or no or n in order to finish.")
+  snack_order = get_snack()
 
   # Assume no snacks have been bought...
   for item in snack_lists:
@@ -360,8 +351,6 @@ movie_frame = movie_frame.rename(columns={'Orange Juice': 'OJ',
                                           'Surcharge': 'Sur',
                                           'Snack Prices': 'Sna$'})
 
-pandas.set_option('display.max_columns', None)
-pandas.set_option('display.precision', 2)
 #movie_frame['Total'] = movie_frame['Total'.]
 
 #Set up summary dataframe
@@ -372,7 +361,7 @@ for item in snack_lists:
 
 #Get snack profit
 #Get snack total from panda
-snack_total = movie_frame['Snacks'].sum
+snack_total = movie_frame['Sna$'].sum()
 snack_profit = snack_total * 0.2
 summary_data.append(snack_profit)
 
@@ -383,6 +372,13 @@ summary_data.append(ticket_profit)
 #Total profit
 total_profit = snack_profit + ticket_profit
 summary_data.append(total_profit)
+
+#Create summmary frame
+summary_frame = pandas.DataFrame(summary_data_dict)
+summary_frame = summary_frame.set_index('Item')
+
+pandas.set_option('display.max_columns', None)
+pandas.set_option('display.precision', 2)
 
 print_all_loop = ""
 while print_all_loop != "continue":
@@ -397,6 +393,9 @@ while print_all_loop != "continue":
     print("Error: Invalid Input")
 
 print()
+
+print("Snack/Profit Summary:")
+print(summary_frame)
 
 # total_profit = movie_frame['Total']
 
