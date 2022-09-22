@@ -1,3 +1,8 @@
+yes_no = [
+    ["yes", "y"],
+    ["no", "n"]
+]
+
 #String Check
 def string_check(choice, options):
 
@@ -26,24 +31,27 @@ def string_check(choice, options):
         print()
         return "invalid choice"
 
-inst_text = "1st step: Input name. 2nd step: Input your age. 3rd step: Input which snacks you want. In case of change in snacks, the snacks will always be listed before you start checking. Note that there's a 4 per person per snack type limit. 4th step: Input if you want to pay with card or credit. 5th step: Done."
-
+#Function to show instructions if needed.
 def instructions(options):
+  #loop
   show_help = "invalid choice"
   while show_help == "invalid choice":
-    show_help = input("Would you like to see the instructions?").lower()
+    #ask question
+    show_help = input("Would you like to see the instructions? \n").lower()
     string_check(show_help, options)
+    
+    #bc of having issues w/ the loop, had to do this to make sure the loop would loop.
+    if show_help == "yes" or show_help == "y" or show_help == "no" or show_help == "n":
+      show_help = show_help
+    else:
+      show_help = "invalid choice"
   if show_help == "yes" or show_help == "y":
+    #instructions
     print()
     print("INSTRUCTIONS:")
     print()
-    print(inst_text)
+    print("1st step: Input name. \n2nd step: Input your age. \n3rd step: Input which snacks you want. In case of change in snacks, the snacks will always be listed. Note that there's a 4 per person per snack type limit. \n4th step: Input if you want to pay with card or credit. \n5th step: Done.")
   return ""
-
-yes_no = [
-    ["yes", "y"],
-    ["no", "n"]
-]
 
 #Main Part
 
